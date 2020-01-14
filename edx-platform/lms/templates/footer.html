@@ -1,0 +1,108 @@
+## mako
+<%page expression_filter="h"/>
+<%!
+  from django.urls import reverse
+  from django.utils.translation import ugettext as _
+  from branding.api import get_footer
+  from openedx.core.djangoapps.lang_pref.api import footer_language_selector_is_enabled
+%>
+<% footer = get_footer(is_secure=is_secure) %>
+<%namespace name='static' file='static_content.html'/>
+<style>
+nav.nav-legal>ul{
+  padding:0;
+}
+nav.nav-legal>ul>li{
+  display: inline-block;
+  font-size: 0.6875em;
+}
+
+nav.nav-legal>ul>li:not(:first-child)::before{
+  margin-right: 5px;
+  content: '-';
+}
+
+</style>
+  <div class="wrapper wrapper-footer">
+    <footer id="footer-openedx" class="grid-container"
+      ## When rendering the footer through the branding API,
+      ## the direction may not be set on the parent element,
+      ## so we set it here.
+      % if bidi:
+        dir=${bidi}
+      % endif
+    >
+      <div class="colophon">
+        <!-- <nav class="nav-colophon" aria-label="${_('About')}">
+          <ol>
+              % for item_num, link in enumerate(footer['navigation_links'], start=1):
+              <li class="nav-colophon-0${item_num}">
+                <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
+              </li>
+              % endfor
+          </ol>
+        </nav> -->
+
+        % if context.get('include_language_selector', footer_language_selector_is_enabled()):
+            <%include file="${static.get_template_path('widgets/footer-language-selector.html')}"/>
+        % endif
+
+        <div class="wrapper-logo" ">
+          <p>
+            <a href="/">
+              ## The default logo is a placeholder.
+              ## You can either replace this link entirely or update
+              ## the FOOTER_ORGANIZATION_IMAGE in Django settings.
+              ## If you customize FOOTER_ORGANIZATION_IMAGE, then the image
+              ## can be included in the footer on other sites
+              ## (e.g. a blog or marketing front-end) to provide a consistent
+              ## user experience.  See the branding app for details.
+              <img alt="organization logo"  style="height:15px" src="/static/images/logo.png">
+            </a>
+          </p>
+        </div>
+
+        ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
+        <!-- <p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p> -->
+
+        <nav class="nav-legal" aria-label="Legal">
+          <!-- <ul>
+            % for item_num, link in enumerate(footer['legal_links'], start=1):
+              <li class="nav-legal-0${item_num}">
+                <a href="${link['url']}">${link['title']}</a>
+              </li>
+            % endfor
+            <li><a href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a></li>
+          </ul> -->
+         <!-- <ul>
+              <li class="nav-legal-01">
+                  <a href="#">About Us</a>
+              </li>
+              <li class="nav-legal-02">
+                  <a href="#">Privacy Policy</a>
+              </li>                
+              <li class="nav-legal-03">
+                  <a href="#">Contact Us</a>
+              </li>                
+	 </ul> -->
+	 <h6 style="font-size: 0.75rem;">Copyright © 2019 SkillAssure</h6`>
+        </nav>
+      </div>
+
+      ## Please leave this link and use one of the logos provided
+      ## The OpenEdX link may be hidden when this view is served
+      ## through an API to partner sites (such as marketing sites or blogs),
+      ## which are not technically powered by OpenEdX.
+      % if not hide_openedx_link:
+      <!-- <div class="footer-about-openedx">
+        <p>
+          <a href="${footer['openedx_link']['url']}">
+            <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
+          </a>
+        </p>
+      </div> -->
+      % endif
+    </footer>
+  </div>
+
+

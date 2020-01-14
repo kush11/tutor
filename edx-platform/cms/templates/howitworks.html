@@ -1,0 +1,297 @@
+<%page expression_filter="h"/>
+<%inherit file="base.html" />
+<%def name="online_help_token()"><% return "welcome" %></%def>
+<%namespace name='static' file='static_content.html'/>
+<%!
+  from django.urls import reverse
+  from django.utils.translation import ugettext as _
+  from openedx.core.djangolib.markup import HTML, Text
+%>
+
+<%block name="title">${_("Welcome")}</%block>
+<%block name="bodyclass">not-signedin index view-howitworks</%block>
+
+<%block name="content">
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        #banner {
+            background: url(https://res.cloudinary.com/kush636/image/upload/v1573812448/bg-banner.jpg) no-repeat fixed;
+            min-height: 450px;
+            background-size: cover;
+            position: relative;
+        }
+        
+        #layeredbackground {
+            background-color: RGBA(13, 70, 83, 0.75);
+            min-height: 450px;
+            border-radius: 6px;
+            padding-bottom: 8rem;
+            padding-top: 8rem;
+        }
+        
+        #layeredbackground header {
+            border: none;
+            padding-bottom: 3rem;
+            padding-top: 3rem;
+            text-align: center;
+            margin-top: 8em;
+        }
+        
+        #title-header {
+            font-family: 'exo';
+            color: white;
+            font-weight: bold;
+            font-size: 5rem;
+        }
+        
+        #title-header-subtitle {
+            font-family: 'exo';
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .serviceBox {
+            color: #fff;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-align: center;
+            padding: 0 15px 50px;
+            margin-top: 15px;
+            border: 1px solid transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .serviceBox:before {
+            content: "";
+            background: linear-gradient(to bottom, #08949e, #00D9E8);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            -webkit-clip-path: polygon(100% 0, 100% 80%, 50% 100%, 0% 80%, 0 0);
+            clip-path: polygon(100% 0, 100% 80%, 50% 100%, 0% 80%, 0 0);
+        }
+        
+        .serviceBox .service-icon {
+            background: #2a969e;
+            font-size: 60px;
+            line-height: 110px;
+            width: 100px;
+            height: 110px;
+            margin: -20px auto 20px;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .serviceBox:hover .service-icon {
+            text-shadow: 0 0 5px #000;
+            font-size: 65px;
+        }
+        
+        .serviceBox .service-icon:before,
+        .serviceBox .service-icon:after {
+            content: "";
+            background: linear-gradient(-45deg, #28595f 49%, transparent 50%);
+            height: 20px;
+            width: 20px;
+            position: absolute;
+            top: 0;
+            left: -20px;
+        }
+        
+        .serviceBox .service-icon:after {
+            transform: rotateY(180deg);
+            left: auto;
+            right: -20px;
+        }
+        
+        .serviceBox .title {
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0 0 10px;
+        }
+        
+        .serviceBox .description {
+            font-size: 15px;
+        }
+        
+        .serviceBox.red:before {
+            background: linear-gradient(to bottom, #E53947, #f85c6c);
+        }
+        
+        .serviceBox.red .service-icon {
+            background: #e0535f;
+        }
+        
+        .serviceBox.red .service-icon:before,
+        .serviceBox.red .service-icon:after {
+            background: linear-gradient(-45deg, #752027 49%, transparent 50%);
+        }
+        
+        .serviceBox.blue:before {
+            background: linear-gradient(to bottom, #174B6D, #644B82);
+        }
+        
+        .serviceBox.blue .service-icon {
+            background: #156092;
+        }
+        
+        .serviceBox.blue .service-icon:before,
+        .serviceBox.blue .service-icon:after {
+            background: linear-gradient(-45deg, #15374d 49%, transparent 50%);
+        }
+        
+        .serviceBox.green:before {
+            background: linear-gradient(to bottom, #12AB8F, #68BA58);
+        }
+        
+        .serviceBox.green .service-icon {
+            background: #0a977d;
+        }
+        
+        .serviceBox.green .service-icon:before,
+        .serviceBox.green .service-icon:after {
+            background: linear-gradient(-45deg, #2b665b 49%, transparent 50%);
+        }
+        
+        @media only screen and (max-width:990px) {
+            .serviceBox {
+                margin: 15px 0 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <section id="banner">
+            <div id="layeredbackground">
+                <header>
+                    <h1 id="title-header">
+                        WELCOME TO SKILLASSURE - CMS
+                    </h1>
+                    <p id="title-header-subtitle">
+                        CMS helps manage your online courses, so you can focus on teaching them
+                    </p>
+                </header>
+            </div>
+        </section>
+    </div>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                <div class="serviceBox">
+                    <div class="service-icon">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <h3 class="title">Discoveri</h3>
+                    <p class="description">
+                        An AI based Talent Acquisition Model, Personalized for the ‘company’ and the ‘individual’.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                <div class="serviceBox blue">
+                    <div class="service-icon">
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                    <h3 class="title">Talent Incubation</h3>
+                    <p class="description">
+                        Talent Incubation for rapid acquisition of high end technology skills and competencies.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                <div class="serviceBox green">
+                    <div class="service-icon">
+                        <i class="fa fa-rocket"></i>
+                    </div>
+                    <h3 class="title">Startup Accelerator</h3>
+                    <p class="description">
+                            Startup Accelerators for entrepreneurs seeking resources critical for success.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+<div class="wrapper-content-cta wrapper">
+  <section class="content content-cta">
+    <header>
+      <h2 class="sr">${_("Sign Up for {studio_name} Today!").format(studio_name=settings.STUDIO_SHORT_NAME)}</h2>
+    </header>
+
+    <ul class="list-actions">
+      <li class="action-item">
+        <a href="${reverse('signup')}" class="action action-primary">${_("Sign Up & Start Making Your {platform_name} Course").format(platform_name=settings.PLATFORM_NAME)}</a>
+      </li>
+      <li class="action-item">
+        <a href="${reverse('login')}" class="action action-secondary">${_("Already have a SkillAssure Account? Sign In").format(studio_name=settings.STUDIO_SHORT_NAME)}</a>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<div class="content-modal" id="hiw-feature1">
+  <h3 class="title">${_("Outlining Your Course")}</h3>
+  <figure>
+    <img src="${static.url("/home/kush/Desktop/Cmstheme/hiw-feature1.png")}" alt="" />
+    <figcaption class="description">${_("Simple two-level outline to organize your course. Drag and drop, and see your course at a glance.")}</figcaption>
+  </figure>
+
+  <a href="" rel="view" class="action action-modal-close">
+    <span class="icon fa fa-times-circle" aria-hidden="true"></span>
+    <span class="label">${_("close modal")}</span>
+  </a>
+</div>
+
+<div class="content-modal" id="hiw-feature2">
+  <h3 class="title">${_("More than Just Lectures")}</h3>
+  <figure>
+    <img src="${static.url("images/hiw-feature2.png")}" alt="" />
+    <figcaption class="description">${_("Quickly create videos, text snippets, inline discussions, and a variety of problem types.")}</figcaption>
+  </figure>
+
+  <a href="" rel="view" class="action action-modal-close">
+    <span class="icon fa fa-times-circle" aria-hidden="true"></span>
+    <span class="label">${_("close modal")}</span>
+  </a>
+</div>
+
+<div class="content-modal" id="hiw-feature3">
+  <h3 class="title">${_("Publishing on Date")}</h3>
+  <figure>
+    <img src="${static.url("images/hiw-feature3.png")}" alt="" />
+    <figcaption class="description">${_("Simply set the date of a section or subsection, and {studio_name} will publish it to your students for you.").format(studio_name=settings.STUDIO_SHORT_NAME)}</figcaption>
+  </figure>
+
+  <a href="" rel="view" class="action action-modal-close">
+    <span class="icon fa fa-times-circle" aria-hidden="true"></span>
+    <span class="label">${_("close modal")}</span>
+  </a>
+</div>
+</%block>
+
