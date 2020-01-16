@@ -9,7 +9,7 @@ from collections import defaultdict
 from completion.exceptions import UnavailableCompletionData
 from completion.utilities import get_key_to_last_completed_course_block
 from django.conf import settings
-from openedx.features.journals.api import get_journals_context,callFun
+from openedx.features.journals.api import get_journals_context
 from lms.djangoapps.courseware.courses import allow_public_access
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -824,8 +824,7 @@ def student_dashboard(request):
     context = {
         'journal_info': get_journals_context(request),  # TODO: Course Listing Plugin required
         'courses': get_courses(user),
-        'urls': urls,
-        'callFun':callFun(userData, userId),
+        'urls': urls,        
         'programs_data': programs_data,
         'enterprise_message': enterprise_message,
         'consent_required_courses': consent_required_courses,
