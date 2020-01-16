@@ -71,6 +71,9 @@ from util.milestones_helpers import is_entrance_exams_enabled
 from util.model_utils import emit_field_changed_events, get_changed_fields_dict
 from util.query import use_read_replica_if_available
 
+# importing the from django.core.validators import MaxValueValidator valodator
+from django.core.validators import MaxValueValidator
+
 log = logging.getLogger(__name__)
 AUDIT_LOG = logging.getLogger("audit")
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore  # pylint: disable=invalid-name
@@ -392,6 +395,45 @@ class UserStanding(models.Model):
     standing_last_changed_at = models.DateTimeField(auto_now=True)
 
 
+class UserRegistration(models.Model):
+    class Meta(object):
+        db_table = "auth_userregistration"
+        permissions = (("can_deactivate_users", "Can deactivate, but NOT delete users"),)
+
+    # CRITICAL TODO/SECURITY
+    # Sanitize all fields.
+    # This is not visible to other users, but could introduce holes later
+    user = models.OneToOneField(User, unique=True, db_index=True, related_name='userregistration', on_delete=models.CASCADE)    
+    # userName = models.BooleanField(default=1)    
+    firstName = models.CharField(max_length=255, db_index=True)
+    middleName = models.CharField(blank=True, max_length=255)
+    lastName = models.CharField(blank=True, max_length=255)
+
+    gender = models.CharField(max_length=10)
+    dateOfBirth = models.DateField()
+    contactNumber = models.PositiveIntegerField(validators=[MaxValueValidator(9999999999)] )
+
+    emailId = models.EmailField()
+    identyType = models.CharField(max_length=255)
+    identyNo = models.CharField(max_length=255)
+
+    percentage10 = models.CharField(max_length=5)
+    percentage12 = models.CharField(max_length=5)
+
+    qualification = models.CharField(max_length=100)
+    stream = models.CharField(max_length=100)
+    collageName = models.CharField(max_length=100)    
+
+    yearOfPassing = models.IntegerField()
+    gradPercentage = models.CharField(max_length=100)
+    postGradPercentage = models.CharField(max_length=100)
+
+    drive = models.CharField(max_length=50)
+    informationSource = models.CharField(max_length=50)    
+    backlogs = models.CharField(max_length=10)
+
+    created = models.DateTimeField(default= timezone.now)
+
 class UserProfile(models.Model):
     """This is where we store all the user demographic fields. We have a
     separate table for this rather than extending the built-in Django auth_user.
@@ -471,6 +513,7 @@ class UserProfile(models.Model):
     country = CountryField(blank=True, null=True)
     goals = models.TextField(blank=True, null=True)
     allow_certificate = models.BooleanField(default=1)
+    allow_assessment = models.BooleanField(default=0)
     bio = models.CharField(blank=True, null=True, max_length=3000, db_index=False)
     profile_image_uploaded_at = models.DateTimeField(null=True, blank=True)
 
