@@ -899,7 +899,7 @@ def student_dashboard(request):
 @login_required
 @ensure_csrf_cookie
 @add_maintenance_banner
-def discoveryRegistrationyyyy(request):
+def discoveryRegistration(request):
     u = UserRegistration()
     # courseAutoEnroll = CourseEnrollment()
     u.firstName = request.POST.get('FirstName')    
