@@ -1,20 +1,20 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
-  integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
-  integrity="sha256-NXRS8qVcmZ3dOv3LziwznUHPegFhPZ1F/4inU7uC8h0=" crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha256-NXRS8qVcmZ3dOv3LziwznUHPegFhPZ1F/4inU7uC8h0=" crossorigin="anonymous"></script>
 
 <%page expression_filter="h"/>
 <%inherit file="main.html" />
 <%def name="online_help_token()"><% return "learnerdashboard" %>
-</%def>
-<%namespace name='static' file='static_content.html'/>
+    </%def>
+    <%namespace name='static' file='static_content.html'/>
 <%!
 import pytz
 from datetime import datetime, timedelta
@@ -34,12 +34,13 @@ from openedx.core.djangolib.markup import HTML, Text
 from student.models import CourseEnrollment
 %>
 
-<%
+        <%
   cert_name_short = settings.CERT_NAME_SHORT
   cert_name_long = settings.CERT_NAME_LONG
 %>
 
-<%block name="pagetitle">${_("Dashboard")}</%block>
+
+            <%block name="pagetitle">${_("Dashboard")}</%block>
 <%block name="bodyclass">view-dashboard is-authenticated</%block>
 
 <%block name="header_extras">
@@ -54,12 +55,12 @@ from student.models import CourseEnrollment
   <script src="${static.url('js/commerce/credit.js')}"></script>
   <%static:js group='dashboard'/>
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-      $("h3>a.course-target-link").html(function (index, currentHTML) {
-        if (currentHTML.length > 20) {
-          return currentHTML.substr(0, 19) + '...';
-        }
+      $("h3>a.course-target-link").html(function(index, currentHTML) {
+          if (currentHTML.length > 20) {
+              return currentHTML.substr(0, 19) + '...';
+          }
       });
       edx.dashboard.legacy.init({
         dashboard: "${reverse('dashboard') | n, js_escaped_string}",
@@ -256,21 +257,22 @@ from student.models import CourseEnrollment
  border: none!important;
  box-shadow: 0px 1px 4px 0px #91959e;
  }
-
+ 
+ 
+ 
  .details:hover img{
  opacity: 0.5;
  }
-
+ 
  .main{
  display: none;
  }
-
+  
 </style>
-% if data[0].allow_assessment :
 <main id="main" aria-label="Content" tabindex="-1">    
     <div class="dashboard" id="dashboard-main">
       <div class="main-container container" style="padding:0;">
-        <!-- <div class="my-courses col-lg-12" id="my-program">
+        <div class="my-courses col-lg-12" id="my-program">
           <header class="wrapper-header-courses">
             <h2 class="header-courses">My Programs</h2>            
           </header>
@@ -280,34 +282,33 @@ from student.models import CourseEnrollment
                   <article class="course" id="Discoveri">
                     <section class="details">
                       <h2 class="hd hd-2 sr" id="Discoveri">Discoveri</h2>
-                      <h1>Prarian Technology </h1>
                       <div class="wrapper-course-image" style="display: flex;" aria-hidden="true">
-                        <a href="#" class="cover course-target-link" style="width: 100%;height:auto;" tabindex="-1">
+                        <a href="http://52.66.234.33:8000/courses/course-v1:demo+121+2019_T1/about" class="cover course-target-link" style="width: 100%;height:auto;" tabindex="-1">
                           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4cxfV7ce7s9k4aPbIGbLaPPdTliu4IkAhG1UBtK0QM5zrWQfO&s" alt="Discoveri Img" class="course-image" style="height:100%;" />
                         </a>
                       </div>
                       <div class="wrapper-course-details" style="padding: 10px;">
                         <h3 class="course-title" id="Discoveri">
-                          <a data-course-key="Discoveri" href="#" class="course-target-link" tabindex="0">Discoveri</a>
+                          <a data-course-key="Discoveri" href="http://52.66.234.33:8000/courses/course-v1:demo+121+2019_T1/about" class="course-target-link" tabindex="0">Discoveri</a>
                         </h3>
                         <div class="course-info">
                           <span class="fa fa-star checked"></span>
                           <span class="fa fa-star checked"></span>
                           <span class="fa fa-star checked"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                          <span style="font-size: 12px;">&nbsp 3.0 (2302)</span>
+                          <span class="fa fa-star checked"></span>
+                          <span class="fa fa-star checked"></span>
+			  <!-- <span style="font-size: 12px;">&nbsp 3.0 (2302)</span> -->
                         </div>
                       </div>
                       <div class="course-info" style="padding-right:1em">
-                        <span class="fa fa-clock-o pull-right" style="color: #483b3b;"></span>
-                        <span class="pull-right" style="line-height: 1;font-size: 14px; color: #483b3b;">8hrs</span>
+                        <!--<span class="fa fa-clock-o pull-right" style="color: #483b3b;"></span>
+			<span class="pull-right" style="line-height: 1;font-size: 14px; color: #483b3b;">8hrs</span> -->
                       </div>
                     </section>
                   </article>
               </div>
             </li>
-            <li class="course-item" style="margin-bottom: 0px; padding-bottom: 0px; width: 100%; display: inline-block;">
+             <li class="course-item" style="margin-bottom: 0px; padding-bottom: 0px; width: 100%; display: inline-block;">
               <div class="course-container" lang="en">
                   <article class="course" id="TalentIncub">
                     <section class="details">
@@ -368,21 +369,10 @@ from student.models import CourseEnrollment
                     </section>
                   </article>
               </div>
-            </li>
+	    </li> 
           </ul>
           <br/>
-        </div> -->
-        <!-- <h1>${ data[0].allow_assessment }</h1>
-        % for msg in data:
-        <li>${msg}          
-        </li>
-        <form action="/addData/" method="post">
-          <input type="hidden" id="csrf_token" name="csrfmiddlewaretoken" value="${csrf_token}">
-          <input id="id_name" maxlength="50" name="num1" type="number" required />        
-          <input id="id_name" maxlength="50" name="num2" type="number" required />        
-          <input type="submit" value="Submit" />
-        </form>         -->
-    % endfor
+        </div>
         <div class="my-courses col-lg-12" id="my-courses">
           % if display_dashboard_courses:
           <%include file="learner_dashboard/_dashboard_navigation_courses.html"/>
@@ -390,15 +380,15 @@ from student.models import CourseEnrollment
 
           % if len(course_entitlements + course_enrollments) > 0:
             <ul class="listing-courses" id="couserlists">
-
+              
             <%
                 share_settings = configuration_helpers.get_value(
                     'SOCIAL_SHARING_SETTINGS',
                     getattr(settings, 'SOCIAL_SHARING_SETTINGS', {})
                 )
             %>
-% for dashboard_index, enrollment in enumerate(course_entitlements + course_enrollments):
-<%
+            % for dashboard_index, enrollment in enumerate(course_entitlements + course_enrollments):
+              <%
               # Check if the course run is an entitlement and if it has an associated session
               entitlement = enrollment if isinstance(enrollment, CourseEntitlement) else None
               entitlement_session = entitlement.enrollment_course_run if entitlement else None
@@ -449,11 +439,12 @@ from student.models import CourseEnrollment
               course_overview = enrollment.course_overview
               resume_button_url = resume_button_urls[dashboard_index]
               %>
-<%include file='dashboard/_dashboard_course_listing.html' args='course_overview=course_overview, course_card_index=dashboard_index, enrollment=enrollment, is_unfulfilled_entitlement=is_unfulfilled_entitlement, is_fulfilled_entitlement=is_fulfilled_entitlement, entitlement=entitlement, entitlement_session=entitlement_session, entitlement_available_sessions=entitlement_available_sessions, entitlement_expiration_date=entitlement_expiration_date, entitlement_expired_at=entitlement_expired_at, show_courseware_link=show_courseware_link, cert_status=cert_status, can_refund_entitlement=can_refund_entitlement, can_unenroll=can_unenroll, credit_status=credit_status, show_email_settings=show_email_settings, course_mode_info=course_mode_info, is_paid_course=is_paid_course, is_course_blocked=is_course_blocked, verification_status=course_verification_status, course_requirements=course_requirements, dashboard_index=dashboard_index, share_settings=share_settings, user=user, related_programs=related_programs, display_course_modes_on_dashboard=display_course_modes_on_dashboard, show_consent_link=show_consent_link, enterprise_customer_name=enterprise_customer_name, resume_button_url=resume_button_url' />
+                    <%include file='dashboard/_dashboard_course_listing.html' args='course_overview=course_overview, course_card_index=dashboard_index, enrollment=enrollment, is_unfulfilled_entitlement=is_unfulfilled_entitlement, is_fulfilled_entitlement=is_fulfilled_entitlement, entitlement=entitlement, entitlement_session=entitlement_session, entitlement_available_sessions=entitlement_available_sessions, entitlement_expiration_date=entitlement_expiration_date, entitlement_expired_at=entitlement_expired_at, show_courseware_link=show_courseware_link, cert_status=cert_status, can_refund_entitlement=can_refund_entitlement, can_unenroll=can_unenroll, credit_status=credit_status, show_email_settings=show_email_settings, course_mode_info=course_mode_info, is_paid_course=is_paid_course, is_course_blocked=is_course_blocked, verification_status=course_verification_status, course_requirements=course_requirements, dashboard_index=dashboard_index, share_settings=share_settings, user=user, related_programs=related_programs, display_course_modes_on_dashboard=display_course_modes_on_dashboard, show_consent_link=show_consent_link, enterprise_customer_name=enterprise_customer_name, resume_button_url=resume_button_url' />
             % endfor
 
             </ul>
             <br/>
+            
 
           % else:
             <div class="empty-dashboard-message">
@@ -463,9 +454,9 @@ from student.models import CourseEnrollment
                   <p class="custom-message">${empty_dashboard_message | n, decode.utf8}</p>
                 %endif
                 % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
-                  <a class="btn btn-primary" href="${marketing_link('COURSES')}">
+                  <!--<a class="btn btn-primary" href="${marketing_link('COURSES')}">
                     ${_("Explore courses")}
-                  </a>
+		  </a> -->
                 %endif
               % else:
               <p>${_("Activate your account!")}</p>
@@ -491,14 +482,13 @@ from student.models import CourseEnrollment
             </div>
           % endif
         </div>
-        <!-- <div class="my-courses col-lg-12" id="other-courses">
+       <div class="my-courses col-lg-12" id="other-courses">
           <header class="wrapper-header-courses">
             <h2 class="header-courses">Other Courses</h2>            
           </header>
           <ul class="listing-courses" id="otherCouserlists">
-
+          
           %for course in courses:
-            %if course.id :
             <li class="course-item" style="margin-bottom: 0px; padding-bottom: 0px; width: 100%; display: inline-block;">
               <div class="course-container" lang="en">
                   <article class="course" id="course-card-${course.id}">
@@ -530,233 +520,14 @@ from student.models import CourseEnrollment
                   </article>
               </div>
             </li>
-            %endif
           %endfor
           </ul>
           <br/>
-        </div> -->
+       </div> 
       </div>
     </div>
 </main>
-% else :
-<h1>Register</h1>
-<form action="/discoveryRegistration/" method="post" novalidate>
-	<input type="hidden" id="csrf_token" name="csrfmiddlewaretoken" value="${csrf_token}">
-	<div class="row">
-		<div class="col-lg-4">
-			<label class="control-label" for="FirstName">First Name *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" data-val-required="Please select First Name." id="FirstName" name="FirstName" placeholder="First Name" type="text" value="" required /> <span class="field-validation-valid text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true" required ></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="MiddelName">Middle Name</label><span />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" id="MiddelName" name="MiddelName" placeholder="Middle Name" type="text" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="MiddelName" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="LastName">Last Name *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" data-val-required="Please select Last Name." id="LastName" name="LastName" placeholder="Last Name" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="LastName" data-valmsg-replace="true" required ></span>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-    <div class="col-lg-4">
-			<label class="control-label" for="gender">Gender *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select Gender." id="gender" name="Gender">
-					<option value="">--Select Gender--</option>
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>					
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="gender" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="DOB">Date Of Birth *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="off" class="form-control datepicker text-box single-line" data-val="true" data-val-date="The field Date Of Birth * must be a date." data-val-required="Please select Date Of Birth." id="dob" name="DOB" type="date" value="" required /> <span class="field-validation-valid text-danger" data-valmsg-for="DOB" data-valmsg-replace="true" required ></span>
-			</div>
-    </div>
-    
-		<div class="col-lg-4">
-			<label class="control-label" for="ContactNumber">Contact Number *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-phone="The Contact Number * field is not a valid phone number." data-val-regex="Not a valid phone number" data-val-regex-pattern="^(\d{10})$" data-val-required="Please select Contact Number." id="ContactNumber" name="ContactNumber" placeholder="Eg: 9845198451" type="tel" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="ContactNumber" data-valmsg-replace="true"required ></span>
-			</div>
-		</div>		
-	</div>
-	<div class="row">
-    <div class="col-lg-4">
-			<label class="control-label" for="EmailId">Email ID *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-email" class="form-control text-box single-line" data-val="true" data-val-email="The Email ID * field is not a valid e-mail address." data-val-required="Please select Email Id." id="EmailId" name="EmailId" placeholder="Eg: abc@example.com" type="email" value="" required /> <span class="field-validation-valid text-danger" data-valmsg-for="EmailId" data-valmsg-replace="true" required ></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="IDProof">Identity Type *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select Identity Type." id="IDProof" name="IDProof" required>
-					<option value="">--Select The ID Type--</option>
-					<option value="Aadhar">Aadhar</option>
-					<option value="Driving License">Driving License</option>
-					<option value="Voter ID">Voter ID</option>
-					<option value="Passport">Passport</option>
-					<option value="PAN Card">PAN Card</option>
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="IDProof" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="IDNO">Identity No. *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-required="Please select Identity No." id="IDNO" name="IDNO" placeholder="Identity Number" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="IDNO" data-valmsg-replace="true" required ></span>
-			</div>
-		</div>		
-  </div>
-  <br/>
-  <div class="row">
-    <div class="col-lg-4">
-			<label class="control-label" for="TenthPercentage">10th % *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-range="Please enter only number and &lt;br/> No % symbol and &lt;br/> max to 2 decimal point: (Eg: 95.45)" data-val-range-max="100" data-val-range-min="0.01" data-val-required="Please select Tenth Percentage." id="TenthPercentage" name="TenthPercentage" placeholder="Eg: 85.25" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="TenthPercentage" data-valmsg-replace="true" required ></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="TwelvePercentage">12th/PUC/Diploma % *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-range="Please enter only number and &lt;br/> No % symbol and &lt;br/> max to 2 decimal point: (Eg: 95.45)" data-val-range-max="100" data-val-range-min="0.01" data-val-required="Please select Twelfth Percentage." id="TwelvePercentage" name="TwelvePercentage" placeholder="Eg: 85.25" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="TwelvePercentage" data-valmsg-replace="true" required ></span>
-			</div>
-    </div>    
-  </div>
-  <br/>
-  <div class="row">
-    <div class="col-lg-4">
-			<label class="control-label" for="Qualification">Qualification *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select Qualification." id="Qualification" name="Qualification"required >
-					<option value="">--Select Qualification--</option>
-					<option value="MSC">MSC</option>
-					<option value="MCA">MCA</option>
-					<option value="M-Tech">M-Tech</option>
-					<option value="BE">BE</option>
-					<option value="B-Tech">B-Tech</option>
-					<option value="BCA">BCA</option>
-					<option value="BSC">BSC</option>
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="Qualification" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="StreamOrBranch">Stream/Branch *</label><span class="required" />
-			<div class="col-lg-12">
-				<input class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" data-val-required="Please select Stream Or Branch." id="StreamOrBranch" name="StreamOrBranch" placeholder="Eg: CS, IT, EEE, EC, Mechanical, Architecture" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="StreamOrBranch" data-valmsg-replace="true" required></span>
-			</div>
-    </div>
-    <div class="col-lg-4">
-			<label class="control-label" for="CollegeName">College Name *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-required="Please select College Name." id="CollegeName" name="CollegeName" placeholder="College Name" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="CollegeName" data-valmsg-replace="true" required></span>
-			</div>
-		</div>
-  </div>	
-	<div class="row">
-		
-		<div class="col-lg-4">
-			<label class="control-label" for="YearOfPassing">Year Of Passing *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select Year Of Passing." id="YearOfPassing" name="YearOfPassing" required>
-					<option value="">--Select Year Of Passing--</option>
-					<option value="2018">2018</option>
-					<option value="2019">2019</option>
-					<option value="2020">2020</option>
-					<option value="2021">2021</option>
-					<option value="2022">2022</option>
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="YearOfPassing" data-valmsg-replace="true"></span>
-			</div>
-    </div>
-    <div class="col-lg-4">
-			<label class="control-label" for="GraduationPercentage">Grad % *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-range="Please enter only number and &lt;br/> No % symbol and &lt;br/> max to 2 decimal point: (Eg: 95.45)" data-val-range-max="100" data-val-range-min="0.01" data-val-required="Please select Graduation Percentage." id="GraduationPercentage" name="GraduationPercentage" placeholder="Eg: 85.25" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="GraduationPercentage" data-valmsg-replace="true" required></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="PostGraduationPercentage">Post Grad %</label><span />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-range="Please enter only number and &lt;br/> No % symbol and &lt;br/> max to 2 decimal point: (Eg: 95.45)" data-val-range-max="100" data-val-range-min="0.01" id="PostGraduationPercentage" name="PostGraduationPercentage" placeholder="Eg: 85.25" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="PostGraduationPercentage" data-valmsg-replace="true" required></span>
-			</div>
-		</div>		
-	</div>
-  <div class="row">
-		<div class="col-lg-4">
-			<label class="control-label" for="Drive">Drive *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select the Drive." id="Drive" name="Drive" required>
-					<option value="">--Select Drive--</option>
-					<option value="Campus Drive">Campus Drive</option>
-					<option value="Off Campus Drive">Off Campus Drive</option>
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="Drive" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="SourceName">Information Source *</label><span class="required" />
-			<div class="col-lg-12">
-				<select class="form-control" data-val="true" data-val-required="Please select Information Source." id="SourceName" name="SourceName" required>
-					<option value="">--Select The Reference--</option>
-					<option value="Freshers World">Freshers World</option>
-					<option value="Aspiring Minds">Aspiring Minds</option>
-					<option value="Reference">Reference</option>
-					<option value="Friends">Friends</option>
-					<option value="Walk-In">Walk-In</option>
-					<option value="NA">Others</option>
-				</select> <span class="field-validation-valid text-danger" data-valmsg-for="SourceName" data-valmsg-replace="true"></span>
-			</div>
-    </div>
-    <div class="col-lg-4">
-			<label class="control-label" for="Backlogs">Backlogs *</label><span class="required" />
-			<div class="col-lg-12">
-				<input Checked="checked" data-val="true" data-val-required="Please select Backlogs." id="Backlogs" name="Backlogs" type="radio" value="No" />
-				<label for="No">No</label>&nbsp;&nbsp;&nbsp;
-				<input id="Backlogs" name="Backlogs" type="radio" value="Yes" />
-				<label for="Yes">Yes</label> <span class="field-validation-valid text-danger" data-valmsg-for="Backlogs" data-valmsg-replace="true"></span>
-			</div>
-		</div>		
-	</div>
-  <br/>
-  <br/>
-	<div class="col-lg-12">
-		<div class="col-lg-12">      
-			<input type="submit" value="Submit" class="btn btn-success btn-block" />
-		</div>
-	</div>
-</form>
-<!-- <form action="/addData/" method="post">
-	<input type="hidden" id="csrf_token" name="csrfmiddlewaretoken" value="${csrf_token}">
-	<div class="row">
-		<div class="col-lg-4">
-			<label class="control-label" for="FirstName">First Name *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" data-val-required="Please select First Name." id="FirstName" name="FirstName" placeholder="First Name" type="text" value="" required /> <span class="field-validation-valid text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="MiddelName">Middle Name</label><span />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" id="MiddelName" name="MiddelName" placeholder="Middle Name" type="text" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="MiddelName" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-		<div class="col-lg-4">
-			<label class="control-label" for="LastName">Last Name *</label><span class="required" />
-			<div class="col-lg-12">
-				<input autocomplete="new-text" class="form-control text-box single-line" data-val="true" data-val-regex="Use letters only" data-val-regex-pattern="^[a-zA-Z\s]+$" data-val-required="Please select Last Name." id="LastName" name="LastName" placeholder="Last Name" type="text" value="" required/> <span class="field-validation-valid text-danger" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
-			</div>
-		</div>
-	</div>
-	<input id="id_name" maxlength="50" name="num1" type="number" required />
-	<input id="id_name" maxlength="50" name="num2" type="number" required />
-	<input type="submit" value="Submit" />
-</form> -->
-% endif
+
 <div id="email-settings-modal" class="modal" aria-hidden="true">
   <div class="inner-wrapper" role="dialog" aria-labelledby="email-settings-title">
     <button class="close-modal">
@@ -820,7 +591,8 @@ from student.models import CourseEnrollment
   </div>
 </div>
 <script>
-
+      
 </script>
+
 
 <%include file="dashboard/_dashboard_entitlement_unenrollment_modal.html"/>

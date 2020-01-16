@@ -74,9 +74,6 @@ urlpatterns = [
     url(r'^dashboard/?$', student_views.student_dashboard, name='dashboard'),
     url(r'^change_enrollment$', student_views.change_enrollment, name='change_enrollment'),
 
-    # added new field to the db
-    url(r'^discoveryRegistration/?$', student_views.discoveryRegistration, name='discoveryRegistration'),
-
     # Event tracking endpoints
     url(r'', include('track.urls')),
 

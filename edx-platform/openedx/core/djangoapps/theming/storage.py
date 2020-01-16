@@ -255,6 +255,9 @@ class ThemePipelineMixin(PipelineMixin):
         'source_filenames': [
             'js/vendor/afontgarde/afontgarde.css',
             'css/vendor/font-awesome.css',
+            'css/creative.min.css',
+            'js/vendor/magnific-popup/magnific-popup.css',
+            'js/vendor/fontawesome-free/css/all.min.css',
             'css/vendor/jquery.qtip.min.css',
             'css/vendor/responsive-carousel/responsive-carousel.css',
             'css/vendor/responsive-carousel/responsive-carousel.slide.css',

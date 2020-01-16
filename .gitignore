@@ -1,0 +1,12 @@
+/bin
+/config
+/dada/
+/locale
+/media
+/nodeenv
+/requirements
+/staticfiles
+/themes
+/venv
+/gunicorn_conf.py
+# /edx-platform

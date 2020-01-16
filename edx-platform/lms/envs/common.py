@@ -1500,6 +1500,9 @@ PIPELINE_CSS = {
     'style-vendor': {
         'source_filenames': [
             'css/vendor/font-awesome.css',
+            'css/creative.min.css',
+            'js/vendor/magnific-popup/magnific-popup.css',
+            'js/vendor/fontawesome-free/css/all.min.css',
             'css/vendor/jquery.qtip.min.css',
         ],
         'output_filename': 'css/lms-style-vendor.css',
@@ -1618,6 +1621,7 @@ PIPELINE_CSS = {
         'source_filenames': [
             'certificates/css/main-ltr.css',
             'css/vendor/font-awesome.css',
+            'js/vendor/fontawesome-free/css/all.min.css',
         ],
         'output_filename': 'css/certificates-style.css'
     },
@@ -1625,6 +1629,11 @@ PIPELINE_CSS = {
         'source_filenames': [
             'certificates/css/main-rtl.css',
             'css/vendor/font-awesome.css',
+            'css/creative.min.css',
+            'css/creative.min.css',
+            'js/vendor/magnific-popup/magnific-popup.css',
+            'js/vendor/magnific-popup/magnific-popup.css',
+            'js/vendor/fontawesome-free/css/all.min.css',
         ],
         'output_filename': 'css/certificates-style-rtl.css'
     },

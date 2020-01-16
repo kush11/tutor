@@ -357,25 +357,3 @@ def get_journals_context(request):
     journal_info['journal_bundles'] = get_journal_bundles(request.site)
 
     return journal_info
-
-def callFun(request,response):
-    """
-    Return dict of Journal context information for a given request
-
-    Args:
-        request: The request to process
-
-    Returns:
-        dict containing the following information:
-        dict['journals'] - list of Journals available for purchase
-        dict['journal_bundles'] - list of JournalBundles available for purchase
-    """
-    journal_info = {}
-    
-    if response in request :
-        return True
-    #     journal_info["status"]="false"
-    # journal_info["status"]="true"
-
-    return False
-
