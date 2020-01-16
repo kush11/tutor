@@ -9,7 +9,7 @@ from collections import defaultdict
 from completion.exceptions import UnavailableCompletionData
 from completion.utilities import get_key_to_last_completed_course_block
 from django.conf import settings
-from openedx.features.journals.api import get_journals_context
+from openedx.features.journals.api import get_journals_context,callFun
 from lms.djangoapps.courseware.courses import allow_public_access
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -58,13 +58,16 @@ from student.models import (
     CourseEnrollment,
     CourseEnrollmentAttribute,
     DashboardConfiguration,
-    UserProfile
+    UserProfile,
+    UserRegistration
 )
 from util.milestones_helpers import get_pre_requisite_courses_not_completed
 from xmodule.modulestore.django import modulestore
 
 log = logging.getLogger("edx.student")
 
+userData = 'kush'
+userId = 'dsadsd'
 
 def get_org_black_and_whitelist_for_site():
     """
@@ -555,8 +558,10 @@ def student_dashboard(request):
 
     """
     user = request.user
+    userNewData = UserProfile.objects.filter(user=user)
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))
+    
 
     platform_name = configuration_helpers.get_value("platform_name", settings.PLATFORM_NAME)
 
@@ -820,6 +825,7 @@ def student_dashboard(request):
         'journal_info': get_journals_context(request),  # TODO: Course Listing Plugin required
         'courses': get_courses(user),
         'urls': urls,
+        'callFun':callFun(userData, userId),
         'programs_data': programs_data,
         'enterprise_message': enterprise_message,
         'consent_required_courses': consent_required_courses,
@@ -868,6 +874,7 @@ def student_dashboard(request):
         'empty_dashboard_message': empty_dashboard_message,
         'recovery_email_message': recovery_email_message,
         'recovery_email_activation_message': recovery_email_activation_message,
+        'data':userNewData,
     }
 
     if ecommerce_service.is_enabled(request.user):
@@ -890,3 +897,86 @@ def student_dashboard(request):
     set_logged_in_cookies(request, response, user)
     return response
 
+@login_required
+@ensure_csrf_cookie
+@add_maintenance_banner
+def discoveryRegistrationyyyy(request):
+    u = UserRegistration()
+    # courseAutoEnroll = CourseEnrollment()
+    u.firstName = request.POST.get('FirstName')    
+    u.middleName= request.POST.get('MiddelName')
+    u.lastName= request.POST.get('LastName')
+
+    u.gender = request.POST.get('Gender')
+    u.dateOfBirth = request.POST.get('DOB')    
+    u.contactNumber= request.POST.get('ContactNumber')    
+
+    u.emailId= request.POST.get('EmailId')
+    u.identyType= request.POST.get('IDProof')
+    u.identyNo= request.POST.get('IDNO')
+
+    u.percentage10= request.POST.get('TenthPercentage')
+    u.percentage12= request.POST.get('TwelvePercentage')
+
+    u.qualification= request.POST.get('Qualification')
+    u.stream= request.POST.get('StreamOrBranch')
+    u.collageName= request.POST.get('CollegeName')
+
+    u.yearOfPassing= request.POST.get('YearOfPassing')
+    u.gradPercentage = request.POST.get('GraduationPercentage')
+    u.postGradPercentage = request.POST.get('PostGraduationPercentage')
+
+    u.drive= request.POST.get('Drive')
+    u.informationSource= request.POST.get('SourceName')
+    u.backlogs = request.POST.get('Backlogs')    
+    
+    # courseAutoEnroll.course_id = 'course-v1:edX+DemoX+Demo_Course'
+    # courseAutoEnroll.is_active = 1
+    # courseAutoEnroll.mode = 'audit',
+    # courseAutoEnroll.user_id = 4
+    # u.GraduationPercentage= request.POST.get('GraduationPercentage')
+    # u.PostGraduationPercentage= request.POST.get('PostGraduationPercentage')
+
+    # ContextData = {  
+    #     FirstName ,
+    #     LastName,
+    #     middlename,
+    #     ContactNumber,
+    #     DOB,
+    #     EmailId,
+    #     IDProof,
+    #     IDNO,
+    #     CollegeName,
+    #     Drive,
+    #     SourceName,
+    #     InformationSource,
+    #     Qualification,
+    #     StreamOrBranch,
+    #     YearOfPassing,
+    #     Backlogs,
+    #     TenthPercentage,
+    #     TwelvePercentage,
+    #     GraduationPercentage,
+    #     PostGraduationPercentage,
+    # }
+    # res = num1+num2
+    userName = request.user
+    # dad = UserProfile()    
+    u.user = request.user
+    u.save()
+    #UserRegistration.objects.add(firstName='kush')?
+    UserProfile.objects.filter(user=userName).update(allow_assessment=1)
+    # courseAutoEnroll.save()
+
+    # auto enrollint the user to the course with the course id    
+    course_id = 'course-v1:edX+DemoX+Demo_Course'
+    enroll_mode = 'audit'
+    user = request.user
+    check_access = True    
+    course_key = CourseKey.from_string(course_id)
+    CourseEnrollment.enroll(user, course_key, check_access=check_access, mode=enroll_mode)
+    # CourseEnrollment.enroll(userName, course_id, check_access=True, mode=enroll_mode)
+
+
+    # UserProfile.objects.filter(user=userName).update(newData=num1)
+    return render_to_response('discoveryRegistration.html',{'post_data':'ContextData'})
